@@ -51,7 +51,9 @@ ChatBot::ChatBot(const ChatBot &source)
     _image = new wxBitmap();
     *_image = *source._image;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
 }
 
 ChatBot & ChatBot::operator=(const ChatBot &source)
@@ -63,7 +65,9 @@ ChatBot & ChatBot::operator=(const ChatBot &source)
     _image = new wxBitmap();
     *_image = *source._image;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
     return *this;
 }
 
@@ -75,9 +79,13 @@ ChatBot::ChatBot(ChatBot &&source)
 
     _chatLogic = source._chatLogic;
     source._chatLogic = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 
     _rootNode = source._rootNode;
     source._rootNode = nullptr;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
 }
 
 ChatBot & ChatBot::operator=(ChatBot &&source)
@@ -91,9 +99,13 @@ ChatBot & ChatBot::operator=(ChatBot &&source)
 
     _chatLogic = source._chatLogic;
     source._chatLogic = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 
     _rootNode = source._rootNode;
     source._rootNode = nullptr;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
     return *this;
 }
 ////
